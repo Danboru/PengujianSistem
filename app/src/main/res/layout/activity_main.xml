@@ -35,6 +35,33 @@
         android:inputType="number"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TTS"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiTts"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAS"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiTas"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
 
     <Button
         android:id="@+id/btn_kirimDataNilai"
@@ -49,6 +76,15 @@
         android:layout_height="wrap_content"
         android:text="Test"
         android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_tampilkanAlfabhet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:gravity="center"
+        android:textSize="40sp"
         />
 
 </LinearLayout>
