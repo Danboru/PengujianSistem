@@ -52,19 +52,14 @@ public class Perhitungan {
     }
 
     public float getNilaiTtsAkhir(){
-
         float hasilPersentaseTts =  nilaiTts * 40 / 100;
-
         return hasilPersentaseTts;
     }
 
 
     public float getNilaiTasAkhir(){
-
         float hasilPersentaseTas =  nilaiTas * 40 / 100;
-
         return hasilPersentaseTas;
-
     }
 
 }

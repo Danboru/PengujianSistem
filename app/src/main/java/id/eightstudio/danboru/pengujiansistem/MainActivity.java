@@ -9,10 +9,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import id.eightstudio.danboru.pengujiansistem.Activity.Perhitungan;
+import id.eightstudio.danboru.pengujiansistem.Adapter.MahasiswaAdapter;
+import id.eightstudio.danboru.pengujiansistem.Database.DatabaseHelper;
 
 public class MainActivity extends Activity {
 
@@ -20,8 +26,11 @@ public class MainActivity extends Activity {
     EditText nilaiSatu, nilaiDua, nilaiTiga, nilaiTts, nilaiTas;
     TextView tampilkanHasil, tampilkanAlfabeth;
     Button kirimNilaiInputan;
+    ListView listMahasiswa;
 
     String nilaiAlfabhet;
+
+    ArrayList list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,16 @@ public class MainActivity extends Activity {
             }
         });
 
+        DatabaseHelper db = new DatabaseHelper(MainActivity.this);
+
+        //Memasukkan data kedalam list
+        list = db.getAllMahasiswa();
+        ListAdapter adapter = new MahasiswaAdapter(MainActivity.this, list);
+
+        //menggunakan findViewBYId di Fragment
+        ListView listView = (ListView) findViewById(R.id.lv_listMahasiswa);
+        listView.setAdapter(adapter);
+
     }
 
 
@@ -101,6 +120,9 @@ public class MainActivity extends Activity {
         tampilkanHasil = (TextView) findViewById(R.id.tv_tampilkanHasil);
         tampilkanAlfabeth = (TextView) findViewById(R.id.tv_tampilkanAlfabhet);
 
+        //listView
+        listMahasiswa = (ListView) findViewById(R.id.lv_listMahasiswa);
+
 
     }
 
@@ -108,26 +130,28 @@ public class MainActivity extends Activity {
 
         int nilai =  Math.round(terimaNilai);
 
-       if (nilai >=35 && nilai <45 && nilai !=0){
+       if (nilai >=35 && nilai <45){
            nilaiAlfabhet = "D";
        }
-       else if (nilai >=45 && nilai <55 && nilai !=0) {
+       else if (nilai >=45 && nilai <55) {
            nilaiAlfabhet = "CD";
        }
-       else if (nilai >=55 && nilai < 65 && nilai !=0) {
+       else if (nilai >=55 && nilai < 65) {
            nilaiAlfabhet = "C";
        }
-       else if (nilai >=65 && nilai <= 75 && nilai !=0) {
+       else if (nilai >=65 && nilai <= 75) {
            nilaiAlfabhet = "BC";
        }
-       else if (nilai >75 && nilai <=85 && nilai !=0) {
+       else if (nilai >75 && nilai <=85) {
            nilaiAlfabhet = "B";
        }
-       else if (nilai >85 && nilai <90 && nilai !=0) {
+       else if (nilai >85 && nilai <90) {
            nilaiAlfabhet = "AB";
        }
-       else if (nilai >=90 && nilai !=0) {
+       else if (nilai >=90) {
            nilaiAlfabhet = "A";
+       }else {
+           nilaiAlfabhet = "Belajar Nak";
        }
 
 
