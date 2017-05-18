@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/androidTest/debug/xml/dummy_tabs_five.xml",
+        "source": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/src/androidTest/res/xml/dummy_tabs_five.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/androidTest/debug/xml/dummy_tabs_three.xml",
+        "source": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/src/androidTest/res/xml/dummy_tabs_three.xml"
+    }
+]

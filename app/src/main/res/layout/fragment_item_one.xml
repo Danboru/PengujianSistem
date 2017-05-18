@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NILAI"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiSatu"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiDua"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiTiga"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TTS"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiTts"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAS"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edt_nilaiTas"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/btn_kirimDataNilai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kirim"
+        />
+
+    <TextView
+        android:id="@+id/tv_tampilkanHasil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_tampilkanAlfabhet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:gravity="center"
+        android:textSize="40sp"
+        />
+
+    <ListView
+        android:id="@+id/lv_listMahasiswa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>

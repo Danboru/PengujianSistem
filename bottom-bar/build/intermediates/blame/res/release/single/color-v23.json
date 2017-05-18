@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_default.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/design_tint_password_toggle.xml",
+        "source": "/Users/danboru/.android/build-cache/dee0d5bfe0d5105c60bc74a7d2bdac55b6e2a350/output/res/color-v23/design_tint_password_toggle.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/danboru/AndroidStudioProjects/BottomBar/bottom-bar/build/intermediates/res/merged/release/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/danboru/.android/build-cache/663b6f41ae8871837a84332c3724633b1d903b09/output/res/color-v23/abc_tint_edittext.xml"
+    }
+]
