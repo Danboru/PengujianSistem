@@ -1,23 +1,3 @@
-/*
- * Copyright (c) 2017. Truiton (http://www.truiton.com/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Contributors:
- * Mohit Gupt (https://github.com/mohitgupt)
- *
- */
-
 package id.eightstudio.danboru.pengujiansistem.Fragments;
 
 import android.app.Activity;
@@ -48,11 +28,8 @@ public class ItemOneFragment extends Fragment {
     EditText nilaiSatu, nilaiDua, nilaiTiga, nilaiTts, nilaiTas;
     TextView tampilkanHasil, tampilkanAlfabeth;
     Button kirimNilaiInputan;
-    ListView listMahasiswa;
 
     String nilaiAlfabhet;
-
-    ArrayList<MahasiswaProvider> list = new ArrayList();
 
     public static ItemOneFragment newInstance() {
         ItemOneFragment fragment = new ItemOneFragment();
@@ -85,9 +62,6 @@ public class ItemOneFragment extends Fragment {
         //TextView
         tampilkanHasil = (TextView) view.findViewById(R.id.tv_tampilkanHasil);
         tampilkanAlfabeth = (TextView) view.findViewById(R.id.tv_tampilkanAlfabhet);
-
-        //listView
-        listMahasiswa = (ListView) view.findViewById(R.id.lv_listMahasiswa);
 
 
         final DatabaseHelper db = new DatabaseHelper(getContext());
@@ -125,27 +99,21 @@ public class ItemOneFragment extends Fragment {
                     float hasilTtsAkhir = hitung.getNilaiTtsAkhir();
                     float hasilTasAkhir = hitung.getNilaiTtsAkhir();
 
+                    float hasil = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
+
                     //Set nilai akhir ke textView yang bersangkutan
-                    tampilkanHasil.setText(String.valueOf(hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir));
+                    tampilkanHasil.setText(String.valueOf(hasil));
 
                     float alfabethic = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
                     cetakNilai(alfabethic);
 
                     tampilkanAlfabeth.setText(nilaiAlfabhet);
 
-                    db.addMahasiswa(new MahasiswaProvider("Nama", 672014113, 100, "AB"));
+                    db.addMahasiswa(new MahasiswaProvider("Nama", 672014113, Math.round(hasil), nilaiAlfabhet));
 
                 }
             }
         });
-
-        //Memasukkan data kedalam list
-        list = db.getAllMahasiswa();
-        ListAdapter adapter = new MahasiswaAdapter((Activity) getContext(), list);
-
-        //menggunakan findViewBYId di Fragment
-        ListView listView = (ListView) view.findViewById(R.id.lv_listMahasiswa);
-        listView.setAdapter(adapter);
 
         return  view;
 
@@ -177,7 +145,7 @@ public class ItemOneFragment extends Fragment {
         else if (nilai >=90) {
             nilaiAlfabhet = "A";
         }else {
-            nilaiAlfabhet = "Belajar Nak";
+            nilaiAlfabhet = "Keterlaluan";
         }
 
     }
