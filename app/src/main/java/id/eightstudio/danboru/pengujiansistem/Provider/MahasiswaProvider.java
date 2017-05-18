@@ -11,6 +11,12 @@ public class MahasiswaProvider {
     public MahasiswaProvider() {
     }
 
+    public MahasiswaProvider(int id_mahasiswa, String nama_mahasiswa, int nim_mahasiswa) {
+        this.id_mahasiswa = id_mahasiswa;
+        this.nama_mahasiswa = nama_mahasiswa;
+        this.nim_mahasiswa = nim_mahasiswa;
+    }
+
     public MahasiswaProvider(String nama_mahasiswa, int nim_mahasiswa, int nilai_mahasiswa, String alfabhet_mahasiswa) {
         this.nama_mahasiswa = nama_mahasiswa;
         this.nim_mahasiswa = nim_mahasiswa;

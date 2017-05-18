@@ -1,13 +1,23 @@
 package id.eightstudio.danboru.pengujiansistem.Fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,7 +59,118 @@ public class ItemTwoFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.lv_listMahasiswa);
         listView.setAdapter(adapter);
 
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Memanggil fungsi show
+                showInfoDialog(position);
+            }
+        });
         return view;
     }
+
+    /**
+     * Memunculkan dialog yang berisikan informasi yang di ambil dari database
+     * */
+    private void showInfoDialog(int position) {
+
+        //Pembuatan object database
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        list = db.getAllMahasiswa();
+
+        //Data row
+        final MahasiswaProvider mahasiswa = (MahasiswaProvider) list.get(position);
+
+        //View Dialog berdasarkan context
+        final Dialog dialog = new Dialog(getContext());
+
+        //Mengeset judul dialog
+        dialog.setTitle("Info Barang");
+
+        //Mengeset layout
+        dialog.setContentView(R.layout.popup_layout);
+
+        //Membuat agar dialog tidak hilang saat di click di area luar dialog
+        dialog.setCanceledOnTouchOutside(true);
+
+        //Membuat dialog agar berukuran responsive
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        dialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        //Inisialisasi View
+        final EditText infoNamaMahasiswa = (EditText) dialog.findViewById(R.id.infoNamaMahasiswa);
+        final EditText infoNimMahasiswa = (EditText) dialog.findViewById(R.id.infoNimMahasiswa);
+        final TextView infoNilaiMahasiswa = (TextView) dialog.findViewById(R.id.infoNilaiMahasiswa);
+        Button updateMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_updateMahasiswa);
+        Button deleteMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_deleteMahasiswa);
+
+        //Mutator view
+        infoNamaMahasiswa.setText(mahasiswa.getNama_mahasiswa().toString().trim());
+        infoNimMahasiswa.setText(String.valueOf(mahasiswa.getNim_mahasiswa()));
+        infoNilaiMahasiswa.setText(String.valueOf(mahasiswa.getNilai_mahasiswa()));
+
+        //Listener Button
+        updateMahasiswaInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String nama = infoNamaMahasiswa.getText().toString();
+                String nim = infoNimMahasiswa.getText().toString();
+                Integer nilai = Integer.parseInt(infoNilaiMahasiswa.getText().toString());
+
+                //Menangani ketika barang gagal di update, agar program tidak langsung keluar (Forceclose)
+                try {
+                    //Menjalankan fungsi update
+                    DatabaseHelper db = new DatabaseHelper(getContext());
+                    db.updateMahasiswa(new MahasiswaProvider(mahasiswa.getId_mahasiswa(), nama, Integer.parseInt(nim)) );
+                    Toast.makeText(getContext(), "Barang di Update", Toast.LENGTH_SHORT).show();
+
+                }catch (Exception e){
+                    Toast.makeText(getContext(), "Kesalahan saat Memanggil fungsi update" , Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        //Fungsi delete barang
+        deleteMahasiswaInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Menampilkan alert dialog untuk verifikasi penghapusan barang
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setCanceledOnTouchOutside(false);//Supaya tidak hilang saat di click di luar
+                alertDialog.setMessage("Apakah anda yakin ingin menghapus " + mahasiswa.getNama_mahasiswa() + " ?");
+                alertDialog.setTitle("VERIFIKASI DELETE");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(getContext(), mahasiswa.getNama_mahasiswa() + " Sudah di Hapus", Toast.LENGTH_SHORT).show();
+
+                        //Menjalankan fungsi hapus barang
+                        DatabaseHelper db = new DatabaseHelper(getContext());
+                        db.deleteMahasiswa(new MahasiswaProvider(mahasiswa.getId_mahasiswa(), null, 0, 0, null));
+                    }
+                });
+
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Penghapusan Di Batalkan", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //Menampilkan popup
+                alertDialog.show();
+                //Menutup popup
+                dialog.dismiss();
+            }
+        });
+
+        //Menampilkan custom dialog
+        dialog.show();
+    }
+
 }

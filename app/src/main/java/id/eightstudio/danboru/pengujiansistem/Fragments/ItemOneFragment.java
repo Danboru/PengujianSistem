@@ -25,8 +25,7 @@ import id.eightstudio.danboru.pengujiansistem.R;
 public class ItemOneFragment extends Fragment {
 
     //View yang akan di gunakan
-    EditText nilaiSatu, nilaiDua, nilaiTiga, nilaiTts, nilaiTas;
-    TextView tampilkanHasil, tampilkanAlfabeth;
+    EditText namaMahasiswa, nimMahasiswa, nilaiSatu, nilaiDua, nilaiTiga, nilaiTts, nilaiTas;
     Button kirimNilaiInputan;
 
     String nilaiAlfabhet;
@@ -52,16 +51,14 @@ public class ItemOneFragment extends Fragment {
         kirimNilaiInputan = (Button) view.findViewById(R.id.btn_kirimDataNilai);
 
         //EditText
+        namaMahasiswa = (EditText) view.findViewById(R.id.edt_namaMahasiswa);
+        nimMahasiswa = (EditText) view.findViewById(R.id.edt_nimMahasiswa);
         nilaiSatu = (EditText) view.findViewById(R.id.edt_nilaiSatu);
         nilaiDua = (EditText) view.findViewById(R.id.edt_nilaiDua);
         nilaiTiga = (EditText) view.findViewById(R.id.edt_nilaiTiga);
 
         nilaiTts = (EditText) view.findViewById(R.id.edt_nilaiTts);
         nilaiTas = (EditText) view.findViewById(R.id.edt_nilaiTas);
-
-        //TextView
-        tampilkanHasil = (TextView) view.findViewById(R.id.tv_tampilkanHasil);
-        tampilkanAlfabeth = (TextView) view.findViewById(R.id.tv_tampilkanAlfabhet);
 
 
         final DatabaseHelper db = new DatabaseHelper(getContext());
@@ -70,7 +67,8 @@ public class ItemOneFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if( (nilaiSatu.getText().toString().isEmpty() == true) || (nilaiDua.getText().toString().isEmpty() == true)
+                if( (namaMahasiswa.getText().toString().isEmpty() == true) || (nimMahasiswa.getText().toString().isEmpty() == true)
+                        || (nilaiSatu.getText().toString().isEmpty() == true) || (nilaiDua.getText().toString().isEmpty() == true)
                         || (nilaiTiga.getText().toString().isEmpty() == true) || (nilaiTts.getText().toString().isEmpty() == true)
                         || (nilaiTas.getText().toString().isEmpty() == true)
                         ){
@@ -101,27 +99,34 @@ public class ItemOneFragment extends Fragment {
 
                     float hasil = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
 
-                    //Set nilai akhir ke textView yang bersangkutan
-                    tampilkanHasil.setText(String.valueOf(hasil));
-
                     float alfabethic = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
                     cetakNilai(alfabethic);
 
-                    tampilkanAlfabeth.setText(nilaiAlfabhet);
+                    db.addMahasiswa(new MahasiswaProvider(namaMahasiswa.getText().toString(),
+                           Integer.parseInt(nimMahasiswa.getText().toString()), Math.round(hasil), nilaiAlfabhet));
 
-                    db.addMahasiswa(new MahasiswaProvider("Nama", 672014113, Math.round(hasil), nilaiAlfabhet));
+                    Toast.makeText(getContext(), "Berhasil Input Data", Toast.LENGTH_SHORT).show();
+
+                    //Bersihkan isi fields
+                    namaMahasiswa.setText("");
+                    nimMahasiswa.setText("");
+                    nilaiSatu.setText("");
+                    nilaiDua.setText("");
+                    nilaiTiga.setText("");
+                    nilaiTts.setText("");
+                    nilaiTas.setText("");
 
                 }
             }
         });
 
-        return  view;
 
+
+        return  view;
     }
 
 
     public void cetakNilai(Float terimaNilai){
-
         int nilai =  Math.round(terimaNilai);
 
         if (nilai >=35 && nilai <45){
@@ -149,4 +154,6 @@ public class ItemOneFragment extends Fragment {
         }
 
     }
+
+
 }
