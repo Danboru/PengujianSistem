@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import id.eightstudio.danboru.pengujiansistem.Activity.Perhitungan;
 import id.eightstudio.danboru.pengujiansistem.Adapter.MahasiswaAdapter;
 import id.eightstudio.danboru.pengujiansistem.Database.DatabaseHelper;
+import id.eightstudio.danboru.pengujiansistem.Provider.MahasiswaProvider;
 
 public class MainActivity extends Activity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
 
     String nilaiAlfabhet;
 
-    ArrayList list = new ArrayList();
+    ArrayList<MahasiswaProvider> list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class MainActivity extends Activity {
 
         //Mengisnisialisasi view yang akan di gunakan
         inisialView();
+
+        final DatabaseHelper db = new DatabaseHelper(MainActivity.this);
         
         kirimNilaiInputan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +86,11 @@ public class MainActivity extends Activity {
 
                     tampilkanAlfabeth.setText(nilaiAlfabhet);
 
+                    db.addMahasiswa(new MahasiswaProvider("Nama", 672014113, 100, "AB"));
+
                 }
             }
         });
-
-        DatabaseHelper db = new DatabaseHelper(MainActivity.this);
 
         //Memasukkan data kedalam list
         list = db.getAllMahasiswa();

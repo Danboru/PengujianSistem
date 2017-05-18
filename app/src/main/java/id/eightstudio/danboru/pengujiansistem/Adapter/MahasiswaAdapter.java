@@ -41,32 +41,35 @@ public class MahasiswaAdapter extends ArrayAdapter {
 
     }
 
-    //Kelas yang di overide dari parent
+    //Kelas yang di override dari parent
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
+
         if (view == null) {
+
             LayoutInflater inflater = act.getLayoutInflater();
             view = inflater.inflate(R.layout.activity_mahasiswa_adapter, null);
 
-            MahasiswaAdapter.ViewHolder holder = new ViewHolder();
+            MahasiswaAdapter.ViewHolder holder = new MahasiswaAdapter.ViewHolder();
 
             //Sesuaikan dengan view yang ada di dalam xml yang di gunakan
             holder.nama_mahasiswa = (TextView) view.findViewById(R.id.txt_rowNamaMahasiswa);
             holder.nim_mahasiswa = (TextView) view.findViewById(R.id.txt_rowNimMahasiswa);
             holder.nilai_mahasiswa = (TextView) view.findViewById(R.id.txt_rowNilaiAkhirMahasiswa);
             holder.aksara_mahasiswa = (TextView) view.findViewById(R.id.txt_rowNilaiAksaraMahasiswa);
+
             view.setTag(holder);
         }
 
-        MahasiswaAdapter.ViewHolder holder = (ViewHolder) view.getTag();
+        MahasiswaAdapter.ViewHolder holder = (MahasiswaAdapter.ViewHolder) view.getTag();
         MahasiswaProvider mahasiswa = (MahasiswaProvider) list.get(position);
 
         //Perhatikan bener-bener tipe data yang ada di dalam data provider
         holder.nama_mahasiswa.setText(String.valueOf(mahasiswa.getNama_mahasiswa()));
-        holder.nim_mahasiswa.setText(mahasiswa.getNim_mahasiswa());
+        holder.nim_mahasiswa.setText(String.valueOf(mahasiswa.getNim_mahasiswa()));
         holder.nilai_mahasiswa.setText(String.valueOf(mahasiswa.getNilai_mahasiswa()));
-        holder.aksara_mahasiswa.setText(mahasiswa.getAlfabhet_mahasiswa());
+        holder.aksara_mahasiswa.setText(String.valueOf(mahasiswa.getAlfabhet_mahasiswa()));
 
         //Return view yang sudah di set dengan data holder
         return view;

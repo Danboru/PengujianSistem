@@ -34,34 +34,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
+    @Override //(FIX)
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_TABLE_MAHASISWA = "CREATE TABLE " + TABLE_MAHASISWA + "{"
+        String CREATE_TABLE_MAHASISWA = "CREATE TABLE " + TABLE_MAHASISWA + " ( "
                 + KEY_ID_MAHASISWA + " INTEGER PRIMARY KEY NOT NULL, "
                 + KEY_NAMA_MAHASISWA + " TEXT, "
                 + KEY_NIM_MAHASISWA + " INTEGER, "
                 + KEY_NILAI_MAHASISWA + " INTEGER, "
-                + KEY_ALFABHET_NILAI_MAHASISWA + "TEXT "
-                + "}";
+                + KEY_ALFABHET_NILAI_MAHASISWA + " TEXT "
+                + ")";
 
         //menjalankan query yang di buat
         db.execSQL(CREATE_TABLE_MAHASISWA);
 
     }
 
-    @Override
+    @Override //(FIX)
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXIST " + TABLE_MAHASISWA);
 
     }
 
-    //Adding New MahasiswaProvider
+    //Adding New MahasiswaProvider (FIX)
     public void addMahasiswa(MahasiswaProvider mahasiswa) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(KEY_NAMA_MAHASISWA, mahasiswa.getNama_mahasiswa());
         values.put(KEY_NIM_MAHASISWA, mahasiswa.getNim_mahasiswa());
         values.put(KEY_NILAI_MAHASISWA, mahasiswa.getNilai_mahasiswa());
@@ -72,20 +73,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting single mahasiswa
+    // Getting single mahasiswa (FIX)
     MahasiswaProvider getMahasiswa(int id) {
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         //ID - NAMA - NIM - NILAI - ALFABETH
         Cursor cursor = db.query(TABLE_MAHASISWA, new String[]{KEY_ID_MAHASISWA,
                         KEY_NAMA_MAHASISWA, KEY_NIM_MAHASISWA, KEY_NILAI_MAHASISWA,
                         KEY_ALFABHET_NILAI_MAHASISWA}, KEY_ID_MAHASISWA + " = ?",
+
                 new String[]{String.valueOf(id)}, null, null, null, null);
 
         if (cursor != null)
             cursor.moveToFirst();
 
-        MahasiswaProvider mahasiswa = new MahasiswaProvider(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)),
+        //Tipe data harus sama dengan yang ada di dalam provider
+        MahasiswaProvider mahasiswa = new MahasiswaProvider(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                Integer.parseInt(cursor.getString(2)),
                 Integer.parseInt(cursor.getString(3)), cursor.getString(4));
 
         //Return user
@@ -95,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Getting All mahasiswa
     public ArrayList<MahasiswaProvider> getAllMahasiswa() {
+
         ArrayList<MahasiswaProvider> mahasiswaList = new ArrayList<MahasiswaProvider>();
 
         // Select All Query
@@ -124,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    // Updating Single MahasiswaProvider
+    // Updating Single MahasiswaProvider (FIX)
     public int updateMahasiswa(MahasiswaProvider mahasiswa) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -139,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[] { String.valueOf(mahasiswa.getId_mahasiswa()) });
     }
 
-    // Deleting single mahasiswa
+    // Deleting single mahasiswa (FIX)
     public void deleteMahasiswa(MahasiswaProvider mahasiswa) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_MAHASISWA, KEY_ID_MAHASISWA + " = ?",
@@ -147,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Getting mahasiswa Count
+    // Getting mahasiswa Count (FIX)
     public int getUserCount() {
         String countQuery = "SELECT * FROM " + TABLE_MAHASISWA;
         SQLiteDatabase db = this.getReadableDatabase();
