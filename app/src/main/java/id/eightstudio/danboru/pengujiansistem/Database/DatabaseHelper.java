@@ -137,8 +137,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAMA_MAHASISWA, mahasiswa.getNama_mahasiswa());
         values.put(KEY_NIM_MAHASISWA, mahasiswa.getNim_mahasiswa());
-        values.put(KEY_NILAI_MAHASISWA, mahasiswa.getNilai_mahasiswa());
-        values.put(KEY_ALFABHET_NILAI_MAHASISWA, mahasiswa.getAlfabhet_mahasiswa());
+//        values.put(KEY_NILAI_MAHASISWA, mahasiswa.getNilai_mahasiswa());
+//        values.put(KEY_ALFABHET_NILAI_MAHASISWA, mahasiswa.getAlfabhet_mahasiswa());
 
         // updating row
         return db.update(TABLE_MAHASISWA, values, KEY_ID_MAHASISWA + " = ?",

@@ -99,8 +99,8 @@ public class ItemTwoFragment extends Fragment {
         dialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         //Inisialisasi View
-        final TextView infoNamaMahasiswa = (TextView) dialog.findViewById(R.id.infoNamaMahasiswa);
-        final TextView infoNimMahasiswa = (TextView) dialog.findViewById(R.id.infoNimMahasiswa);
+        final EditText infoNamaMahasiswa = (EditText) dialog.findViewById(R.id.infoNamaMahasiswa);
+        final EditText infoNimMahasiswa = (EditText) dialog.findViewById(R.id.infoNimMahasiswa);
         final TextView infoNilaiMahasiswa = (TextView) dialog.findViewById(R.id.infoNilaiMahasiswa);
         Button updateMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_updateMahasiswa);
         Button deleteMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_deleteMahasiswa);
@@ -119,16 +119,17 @@ public class ItemTwoFragment extends Fragment {
                 String nim = infoNimMahasiswa.getText().toString();
                 Integer nilai = Integer.parseInt(infoNilaiMahasiswa.getText().toString());
 
-                //Menangani ketika barang gagal di update, agar program tidak langsung keluar (Forceclose)
+                //Menangani ketika mahasiswa gagal di update, agar program tidak langsung keluar (Forceclose)
                 try {
                     //Menjalankan fungsi update
                     DatabaseHelper db = new DatabaseHelper(getContext());
                     db.updateMahasiswa(new MahasiswaProvider(mahasiswa.getId_mahasiswa(), nama, Integer.parseInt(nim)) );
-                    Toast.makeText(getContext(), "Barang di Update", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Berhasil di Update", Toast.LENGTH_SHORT).show();
 
                 }catch (Exception e){
                     Toast.makeText(getContext(), "Kesalahan saat Memanggil fungsi update" , Toast.LENGTH_SHORT).show();
                 }
+
                 dialog.dismiss();
             }
         });
