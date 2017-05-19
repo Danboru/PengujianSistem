@@ -99,8 +99,8 @@ public class ItemTwoFragment extends Fragment {
         dialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         //Inisialisasi View
-        final EditText infoNamaMahasiswa = (EditText) dialog.findViewById(R.id.infoNamaMahasiswa);
-        final EditText infoNimMahasiswa = (EditText) dialog.findViewById(R.id.infoNimMahasiswa);
+        final TextView infoNamaMahasiswa = (TextView) dialog.findViewById(R.id.infoNamaMahasiswa);
+        final TextView infoNimMahasiswa = (TextView) dialog.findViewById(R.id.infoNimMahasiswa);
         final TextView infoNilaiMahasiswa = (TextView) dialog.findViewById(R.id.infoNilaiMahasiswa);
         Button updateMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_updateMahasiswa);
         Button deleteMahasiswaInfo = (Button) dialog.findViewById(R.id.btn_deleteMahasiswa);

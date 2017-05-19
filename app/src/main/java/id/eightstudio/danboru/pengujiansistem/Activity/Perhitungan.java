@@ -5,7 +5,7 @@ package id.eightstudio.danboru.pengujiansistem.Activity;
  */
 public class Perhitungan {
 
-    private float nilaiSatu, nilaiDua, nilaiTiga , rataRataNilai, nilaiTts, nilaiTas;
+    private float nilaiSatu, nilaiDua, nilaiTiga , rataRataNilai, nilaiTts, nilaiTas, hasilPersentaseTts, hasilPersentaseTas;
 
     public void setNilaiSatu(float nilaiSatu) {
         this.nilaiSatu = nilaiSatu;
@@ -17,10 +17,6 @@ public class Perhitungan {
 
     public void setNilaiTiga(float nilaiTiga) {
         this.nilaiTiga = nilaiTiga;
-    }
-
-    public void hitungRataRata(){
-        rataRataNilai = (nilaiSatu + nilaiDua + nilaiTiga) / 3;
     }
 
     public void setNilaiTts(float nilaiTts) {
@@ -35,12 +31,24 @@ public class Perhitungan {
         return rataRataNilai;
     }
 
+    public float getNilaiTtsAkhir(){
+        return hasilPersentaseTts;
+    }
+
+    public float getNilaiTasAkhir(){
+        return hasilPersentaseTas;
+    }
+
+    public void hitungRataRata(){
+        rataRataNilai = (nilaiSatu + nilaiDua + nilaiTiga) / 3;
+    }
+
     public void hitungNilaiTtsAkhir(){
-        float hasilPersentaseTts =  nilaiTts * 40 / 100;
+        hasilPersentaseTts =  nilaiTts * 40 / 100;
     }
 
     public void hitungNilaiTasAkhir(){
-        float hasilPersentaseTas =  nilaiTas * 40 / 100;
+        hasilPersentaseTas =  nilaiTas * 40 / 100;
     }
 
     //Fungsi ini untuk mengambil nilai akhir
@@ -49,17 +57,6 @@ public class Perhitungan {
         //Set nilai ke hasil akhir dari nilai
         hasilAkhir = rataRataNilai * 40 / 100;
         return hasilAkhir;
-    }
-
-    public float getNilaiTtsAkhir(){
-        float hasilPersentaseTts =  nilaiTts * 40 / 100;
-        return hasilPersentaseTts;
-    }
-
-
-    public float getNilaiTasAkhir(){
-        float hasilPersentaseTas =  nilaiTas * 40 / 100;
-        return hasilPersentaseTas;
     }
 
 }
