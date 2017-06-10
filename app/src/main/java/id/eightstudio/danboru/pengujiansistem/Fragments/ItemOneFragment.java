@@ -47,6 +47,9 @@ public class ItemOneFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_item_one, container, false);
+        DatabaseHelper database = new DatabaseHelper(getContext());
+
+        final ArrayList<MahasiswaProvider> nimMahasiswaList = database.getAllNim();
 
         //Button
         kirimNilaiInputan = (Button) view.findViewById(R.id.btn_kirimDataNilai);
@@ -92,45 +95,58 @@ public class ItemOneFragment extends Fragment {
                                 Toast.makeText(getContext(),"Nilai Tidak Boleh 0", Toast.LENGTH_SHORT).show();
                     } else {
 
-                                //Toast.makeText(MainActivity.this, "Ada isinya", Toast.LENGTH_SHORT).show();
+                                //Untuk memastikan nim belum ada di database
+                                if(sudahAda(nimMahasiswaList, Integer.parseInt(nimMahasiswa.getText().toString()))){
 
-                                Perhitungan hitung = new Perhitungan();
+                                    //Jika ada
+                                    Toast.makeText(getContext(), "Nim sudah ada", Toast.LENGTH_SHORT).show();
+                                    nimMahasiswa.setText("");
 
-                                //Set nilai dkedalam variable yang ada di dalam kelas perhitungan
-                                hitung.setNilaiSatu(Float.parseFloat(nilaiSatu.getText().toString().trim()));
-                                hitung.setNilaiDua(Float.parseFloat(nilaiDua.getText().toString().trim()));
-                                hitung.setNilaiTiga(Float.parseFloat(nilaiTiga.getText().toString().trim()));
-                                hitung.setNilaiTts(Float.parseFloat(nilaiTts.getText().toString().trim()));
-                                hitung.setNilaiTas(Float.parseFloat(nilaiTas.getText().toString().trim()));
+                                } else {
 
-                                //Menjalan fungsi perhitungan
-                                hitung.hitungRataRata();
-                                hitung.hitungNilaiTtsAkhir();
-                                hitung.hitungNilaiTasAkhir();
+                                    //Jika tidak ada
+                                    //Toast.makeText(MainActivity.this, "Ada isinya", Toast.LENGTH_SHORT).show();
 
-                                //Get nilai yang sebelumnya sudah di hitung
-                                float hasilRataRataAkhir = hitung.getNilaiRataRataAkhir();
-                                float hasilTtsAkhir = hitung.getNilaiTtsAkhir();
-                                float hasilTasAkhir = hitung.getNilaiTtsAkhir();
+                                    Perhitungan hitung = new Perhitungan();
 
-                                float hasil = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
+                                    //Set nilai dkedalam variable yang ada di dalam kelas perhitungan
+                                    hitung.setNilaiSatu(Float.parseFloat(nilaiSatu.getText().toString().trim()));
+                                    hitung.setNilaiDua(Float.parseFloat(nilaiDua.getText().toString().trim()));
+                                    hitung.setNilaiTiga(Float.parseFloat(nilaiTiga.getText().toString().trim()));
+                                    hitung.setNilaiTts(Float.parseFloat(nilaiTts.getText().toString().trim()));
+                                    hitung.setNilaiTas(Float.parseFloat(nilaiTas.getText().toString().trim()));
 
-                                float alfabethic = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
-                                cetakNilai(alfabethic);
+                                    //Menjalan fungsi perhitungan
+                                    hitung.hitungRataRata();
+                                    hitung.hitungNilaiTtsAkhir();
+                                    hitung.hitungNilaiTasAkhir();
 
-                                db.addMahasiswa(new MahasiswaProvider(namaMahasiswa.getText().toString(),
-                                        Integer.parseInt(nimMahasiswa.getText().toString()), Math.round(hasil), nilaiAlfabhet));
+                                    //Get nilai yang sebelumnya sudah di hitung
+                                    float hasilRataRataAkhir = hitung.getNilaiRataRataAkhir();
+                                    float hasilTtsAkhir = hitung.getNilaiTtsAkhir();
+                                    float hasilTasAkhir = hitung.getNilaiTtsAkhir();
 
-                                Toast.makeText(getContext(), "Berhasil Input Data", Toast.LENGTH_SHORT).show();
+                                    float hasil = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
 
-                                //Bersihkan isi fields
-                                namaMahasiswa.setText("");
-                                nimMahasiswa.setText("");
-                                nilaiSatu.setText("");
-                                nilaiDua.setText("");
-                                nilaiTiga.setText("");
-                                nilaiTts.setText("");
-                                nilaiTas.setText("");
+                                    float alfabethic = hasilRataRataAkhir + hasilTtsAkhir + hasilTasAkhir;
+                                    cetakNilai(alfabethic);
+
+                                    db.addMahasiswa(new MahasiswaProvider(namaMahasiswa.getText().toString(),
+                                            Integer.parseInt(nimMahasiswa.getText().toString()), Math.round(hasil), nilaiAlfabhet));
+
+                                    Toast.makeText(getContext(), "Berhasil Input Data", Toast.LENGTH_SHORT).show();
+
+                                    //Bersihkan isi fields
+                                    namaMahasiswa.setText("");
+                                    nimMahasiswa.setText("");
+                                    nilaiSatu.setText("");
+                                    nilaiDua.setText("");
+                                    nilaiTiga.setText("");
+                                    nilaiTts.setText("");
+                                    nilaiTas.setText("");
+
+
+                                }
 
                             }
 
@@ -141,6 +157,22 @@ public class ItemOneFragment extends Fragment {
 
 
         return  view;
+    }
+
+    public boolean sudahAda(ArrayList<MahasiswaProvider> nimList, int nim){
+
+        boolean keberadaanMahasiswa = false;
+        if (nimList != null){
+            for (MahasiswaProvider mahasiswa : nimList){
+                if (mahasiswa.getNim_mahasiswa() == nim){
+                    keberadaanMahasiswa = true;
+                }
+            }
+        } else {
+            keberadaanMahasiswa = false;
+        }
+
+        return keberadaanMahasiswa;
     }
 
 

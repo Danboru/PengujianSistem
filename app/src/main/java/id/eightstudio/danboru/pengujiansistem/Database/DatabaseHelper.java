@@ -129,6 +129,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mahasiswaList;
     }
 
+    // Getting All mahasiswa
+    public ArrayList<MahasiswaProvider> getAllNim() {
+
+        ArrayList<MahasiswaProvider> mahasiswaList = new ArrayList<MahasiswaProvider>();
+
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + TABLE_MAHASISWA;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // Looping through all rows and adding to list
+        //ID - NAMA - NIM - NILAI - ALFABETH
+        if (cursor.moveToFirst()) {
+            do {
+                MahasiswaProvider mahasiswa = new MahasiswaProvider();
+                mahasiswa.setId_mahasiswa(Integer.parseInt(cursor.getString(0)));
+                mahasiswa.setNama_mahasiswa(cursor.getString(1));
+                mahasiswa.setNim_mahasiswa(Integer.parseInt(cursor.getString(2)));
+                mahasiswa.setNilai_mahasiswa(Integer.parseInt(cursor.getString(3)));
+                mahasiswa.setAlfabhet_mahasiswa(cursor.getString(4));
+
+                // Adding mahasiswa to list
+                mahasiswaList.add(mahasiswa);
+
+            } while (cursor.moveToNext());
+        }
+        // return mahasiswa list
+        return mahasiswaList;
+    }
+
 
     // Updating Single MahasiswaProvider (FIX)
     public int updateMahasiswa(MahasiswaProvider mahasiswa) {
