@@ -5,7 +5,9 @@ package id.eightstudio.danboru.pengujiansistem.Activity;
  */
 public class Perhitungan {
 
-    private float nilaiSatu, nilaiDua, nilaiTiga , rataRataNilai, nilaiTts, nilaiTas, hasilPersentaseTts, hasilPersentaseTas;
+    private float nilaiSatu, nilaiDua, nilaiTiga,
+            rataRataNilai,
+            nilaiTts, nilaiTas, hasilPersentaseTts, hasilPersentaseTas;
 
     public void setNilaiSatu(float nilaiSatu) {
         this.nilaiSatu = nilaiSatu;
