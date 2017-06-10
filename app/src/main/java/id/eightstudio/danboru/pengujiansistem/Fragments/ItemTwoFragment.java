@@ -26,10 +26,14 @@ import id.eightstudio.danboru.pengujiansistem.Database.DatabaseHelper;
 import id.eightstudio.danboru.pengujiansistem.Provider.MahasiswaProvider;
 import id.eightstudio.danboru.pengujiansistem.R;
 
+/**
+ * Created by danboru on 5/17/17.
+ */
 public class ItemTwoFragment extends Fragment {
 
+    //List yang digunakan untuk menampilkan data
     ListView listMahasiswa;
-    ArrayList<MahasiswaProvider> list = new ArrayList();
+    ArrayList<MahasiswaProvider> list = new ArrayList();//Data yang akan di iterasi
 
     public static ItemTwoFragment newInstance() {
         ItemTwoFragment fragment = new ItemTwoFragment();
@@ -49,7 +53,7 @@ public class ItemTwoFragment extends Fragment {
         //listView
         listMahasiswa = (ListView) view.findViewById(R.id.lv_listMahasiswa);
 
-        DatabaseHelper db = new DatabaseHelper(getContext());
+        DatabaseHelper db = new DatabaseHelper(getContext());//Object Database
 
         //Memasukkan data kedalam list
         list = db.getAllMahasiswa();
@@ -59,10 +63,11 @@ public class ItemTwoFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.lv_listMahasiswa);
         listView.setAdapter(adapter);
 
+        //Action untuk menerima setiap item yang di click
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Memanggil fungsi show
+                //Memanggil fungsi showInfoDialog
                 showInfoDialog(position);
             }
         });
@@ -70,7 +75,7 @@ public class ItemTwoFragment extends Fragment {
     }
 
     /**
-     * Memunculkan dialog yang berisikan informasi yang di ambil dari database
+     * Fungsi ini di gunakan untu memunculkan dialog yang berisikan informasi yang di ambil dari database
      * */
     private void showInfoDialog(int position) {
 
@@ -98,7 +103,7 @@ public class ItemTwoFragment extends Fragment {
         int width = metrics.widthPixels;
         dialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        //Inisialisasi View
+        //Inisialisasi View yang akan di gunakan
         final EditText infoNamaMahasiswa = (EditText) dialog.findViewById(R.id.infoNamaMahasiswa);
         final EditText infoNimMahasiswa = (EditText) dialog.findViewById(R.id.infoNimMahasiswa);
         final TextView infoNilaiMahasiswa = (TextView) dialog.findViewById(R.id.infoNilaiMahasiswa);
@@ -130,7 +135,7 @@ public class ItemTwoFragment extends Fragment {
                     Toast.makeText(getContext(), "Kesalahan saat Memanggil fungsi update" , Toast.LENGTH_SHORT).show();
                 }
 
-                dialog.dismiss();
+                dialog.dismiss();//Menyembunykan popup
             }
         });
 

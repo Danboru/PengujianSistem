@@ -23,6 +23,9 @@ import id.eightstudio.danboru.pengujiansistem.Database.DatabaseHelper;
 import id.eightstudio.danboru.pengujiansistem.Provider.MahasiswaProvider;
 import id.eightstudio.danboru.pengujiansistem.R;
 
+/**
+ * Created by danboru on 5/17/17.
+ */
 public class ItemOneFragment extends Fragment {
 
     //View yang akan di gunakan
@@ -61,30 +64,38 @@ public class ItemOneFragment extends Fragment {
         nilaiDua = (EditText) view.findViewById(R.id.edt_nilaiDua);
         nilaiTiga = (EditText) view.findViewById(R.id.edt_nilaiTiga);
 
+        //EditText yang di gunakan
         nilaiTts = (EditText) view.findViewById(R.id.edt_nilaiTts);
         nilaiTas = (EditText) view.findViewById(R.id.edt_nilaiTas);
 
 
+        //Database object
         final DatabaseHelper db = new DatabaseHelper(getContext());
 
         kirimNilaiInputan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Cek input kosong
                 if( (namaMahasiswa.getText().toString().isEmpty() == true) || (nimMahasiswa.getText().toString().isEmpty() == true)
                         || (nilaiSatu.getText().toString().isEmpty() == true) || (nilaiDua.getText().toString().isEmpty() == true)
                         || (nilaiTiga.getText().toString().isEmpty() == true) || (nilaiTts.getText().toString().isEmpty() == true)
                         || (nilaiTas.getText().toString().isEmpty() == true)
                         ) {
 
+                    //Jika kosong
                     Toast.makeText(getContext(), "Isi Semua Inputan", Toast.LENGTH_SHORT).show();
 
                 } else {
+                    //Jika ada isinya semua
+
+                            //Cek input nilai > 100
                             if ((Integer.parseInt(nilaiSatu.getText().toString()) > 100) || (Integer.parseInt(nilaiDua.getText().toString()) > 100)
                             || (Integer.parseInt(nilaiTiga.getText().toString()) > 100) || (Integer.parseInt(nilaiTts.getText().toString()) > 100)
                             || (Integer.parseInt(nilaiTas.getText().toString()) > 100)
                             ){
 
+                                //Jika > 100
                                 Toast.makeText(getContext(),"Nilai Tidak Boleh > 100", Toast.LENGTH_SHORT).show();
 
                     } else if ((Integer.parseInt(nilaiSatu.getText().toString()) < 1) || (Integer.parseInt(nilaiDua.getText().toString()) < 1)
@@ -92,19 +103,20 @@ public class ItemOneFragment extends Fragment {
                                     || (Integer.parseInt(nilaiTas.getText().toString()) < 1)
                                     ) {
 
+                                //Cek jika nilai = 0
                                 Toast.makeText(getContext(),"Nilai Tidak Boleh 0", Toast.LENGTH_SHORT).show();
                     } else {
 
                                 //Untuk memastikan nim belum ada di database
                                 if(sudahAda(nimMahasiswaList, Integer.parseInt(nimMahasiswa.getText().toString()))){
 
-                                    //Jika ada
+                                    //Jika nim sudah tersimpan
                                     Toast.makeText(getContext(), "Nim sudah ada", Toast.LENGTH_SHORT).show();
                                     nimMahasiswa.setText("");
 
                                 } else {
 
-                                    //Jika tidak ada
+                                    //Jika nim belum tersimpan
                                     //Toast.makeText(MainActivity.this, "Ada isinya", Toast.LENGTH_SHORT).show();
 
                                     Perhitungan hitung = new Perhitungan();
@@ -145,20 +157,18 @@ public class ItemOneFragment extends Fragment {
                                     nilaiTts.setText("");
                                     nilaiTas.setText("");
 
-
                                 }
-
                             }
-
                 }
             }
         });
 
-
-
-        return  view;
+        return view;
     }
 
+    /**
+     * Fungsi untuk mgecheck apakah nim yang di masukkan sudah terdaftar atau tersimpat di database
+     * */
     public boolean sudahAda(ArrayList<MahasiswaProvider> nimList, int nim){
 
         boolean keberadaanMahasiswa = false;
@@ -176,8 +186,11 @@ public class ItemOneFragment extends Fragment {
     }
 
 
+    /**
+     * Fungsi untuk cetak nilai
+     * */
     public void cetakNilai(Float terimaNilai){
-        int nilai =  Math.round(terimaNilai);
+        int nilai =  Math.round(terimaNilai);//Konversi float to int
 
         if (nilai >=35 && nilai <45){
             nilaiAlfabhet = "D";

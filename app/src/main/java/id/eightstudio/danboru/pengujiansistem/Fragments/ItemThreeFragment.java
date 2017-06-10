@@ -28,7 +28,11 @@ import android.view.ViewGroup;
 
 import id.eightstudio.danboru.pengujiansistem.R;
 
+/**
+ * Created by danboru on 5/17/17.
+ */
 public class ItemThreeFragment extends Fragment {
+
     public static ItemThreeFragment newInstance() {
         ItemThreeFragment fragment = new ItemThreeFragment();
         return fragment;

@@ -15,6 +15,9 @@ import id.eightstudio.danboru.pengujiansistem.Fragments.ItemOneFragment;
 import id.eightstudio.danboru.pengujiansistem.Fragments.ItemThreeFragment;
 import id.eightstudio.danboru.pengujiansistem.Fragments.ItemTwoFragment;
 
+/**
+ * Created by danboru on 5/17/17.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,24 +29,28 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        //View yang di gunakan untuk set BottomNavigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
+        //menangani click di BottomNavigation
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                        //Fragment awal
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = ItemOneFragment.newInstance();
+                                selectedFragment = ItemOneFragment.newInstance();//set fragment
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = ItemTwoFragment.newInstance();
+                                selectedFragment = ItemTwoFragment.newInstance();//set fragment
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = ItemThreeFragment.newInstance();
+                                selectedFragment = ItemThreeFragment.newInstance();//set fragment
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

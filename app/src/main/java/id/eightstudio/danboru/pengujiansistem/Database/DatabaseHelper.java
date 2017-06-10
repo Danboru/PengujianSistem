@@ -15,14 +15,14 @@ import id.eightstudio.danboru.pengujiansistem.Provider.MahasiswaProvider;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    //database attribute
+    //Database attribute
     private static final String DATABASE_NAME = "universitas";
     private static final int DATABASE_VERSION = 1;
 
-    //table list
+    //Table list
     private static final String TABLE_MAHASISWA = "mahasiswa";
 
-    //table mahasiswa attr
+    //Table mahasiswa attr
     private static final String KEY_ID_MAHASISWA = "id_mahasiswa";
     private static final String KEY_NAMA_MAHASISWA = "nama_mahasiswa";
     private static final String KEY_NIM_MAHASISWA = "nim_mahasiswa";

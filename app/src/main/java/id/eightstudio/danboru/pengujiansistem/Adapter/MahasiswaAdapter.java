@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import id.eightstudio.danboru.pengujiansistem.Provider.MahasiswaProvider;
 import id.eightstudio.danboru.pengujiansistem.R;
 
+/**
+ * Created by danboru on 5/17/17.
+ */
 public class MahasiswaAdapter extends ArrayAdapter {
 
     //Variable yagn di gunakan untuk menampung dta dari database
